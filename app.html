@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Reaction Game App</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      background: linear-gradient(135deg, #0f172a, #1d4ed8);
+      color: white;
+      min-height: 100vh;
+      display: grid;
+      place-items: center;
+    }
+    .app {
+      width: min(92vw, 700px);
+      background: rgba(255,255,255,0.10);
+      backdrop-filter: blur(8px);
+      border-radius: 18px;
+      padding: 28px;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.25);
+      text-align: center;
+    }
+    button {
+      border: none;
+      border-radius: 999px;
+      padding: 12px 22px;
+      font-size: 1rem;
+      cursor: pointer;
+      margin: 8px;
+    }
+    #startBtn { background: #f8fafc; color: #0f172a; }
+    #target {
+      width: 170px;
+      height: 170px;
+      border-radius: 18px;
+      margin: 24px auto;
+      display: none;
+      cursor: pointer;
+      background: #93c5fd;
+    }
+    a { color: #dbeafe; }
+  </style>
+</head>
+<body>
+  <div class="app">
+    <h1>Reaction Time Challenge</h1>
+    <p>This is a small AI-assisted web app built on a single page with HTML, CSS, and JavaScript.</p>
+    <p>Click start. When the square appears, click it as fast as you can.</p>
+    <button id="startBtn">Start Game</button>
+    <div id="target"></div>
+    <h2 id="message">Best time: --</h2>
+    <p><a href="scratch.html">Back to Scratch Page</a></p>
+  </div>
+
+  <script>
+    const target = document.getElementById('target');
+    const startBtn = document.getElementById('startBtn');
+    const message = document.getElementById('message');
+    let startTime = 0;
+    let timeoutId = null;
+    let best = null;
+
+    function randomColor() {
+      const colors = ['#93c5fd', '#86efac', '#fde68a', '#fca5a5', '#c4b5fd'];
+      return colors[Math.floor(Math.random() * colors.length)];
+    }
+
+    function showTarget() {
+      target.style.background = randomColor();
+      target.style.display = 'block';
+      startTime = Date.now();
+      message.textContent = 'Click now';
+    }
+
+    startBtn.addEventListener('click', () => {
+      target.style.display = 'none';
+      message.textContent = 'Wait for it...';
+      const delay = Math.floor(Math.random() * 2500) + 900;
+      clearTimeout(timeoutId);
+      timeoutId = setTimeout(showTarget, delay);
+    });
+
+    target.addEventListener('click', () => {
+      const reaction = Date.now() - startTime;
+      target.style.display = 'none';
+      if (best === null || reaction < best) best = reaction;
+      message.textContent = `Reaction time: ${reaction} ms | Best time: ${best} ms`;
+    });
+  </script>
+</body>
+</html>
