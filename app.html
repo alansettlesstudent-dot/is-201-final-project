@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Joke Generator</title>
+
+<style>
+body{
+margin:0;
+font-family:Arial, Helvetica, sans-serif;
+background:#eef3f8;
+display:flex;
+justify-content:center;
+align-items:center;
+height:100vh;
+}
+
+.box{
+background:white;
+padding:40px;
+border-radius:14px;
+box-shadow:0 8px 20px rgba(0,0,0,.12);
+max-width:500px;
+text-align:center;
+}
+
+h1{
+margin-top:0;
+color:#163455;
+}
+
+p{
+font-size:20px;
+line-height:1.5;
+min-height:90px;
+}
+
+button{
+padding:14px 22px;
+border:none;
+border-radius:8px;
+background:#163455;
+color:white;
+font-size:16px;
+cursor:pointer;
+margin-top:10px;
+}
+
+button:hover{
+background:#24527a;
+}
+
+a{
+display:block;
+margin-top:20px;
+text-decoration:none;
+color:#163455;
+font-weight:bold;
+}
+</style>
+</head>
+
+<body>
+
+<div class="box">
+<h1>Joke Generator</h1>
+
+<p id="joke">Click the button for a joke.</p>
+
+<button onclick="newJoke()">Tell Me A Joke</button>
+
+<a href="scratch.html">Back to My Work</a>
+</div>
+
+<script>
+function newJoke(){
+
+const jokes = [
+"Why did the scarecrow win an award? Because he was outstanding in his field.",
+"Why don’t eggs tell jokes? They crack under pressure.",
+"Why did the student eat his homework? Because the teacher said it was a piece of cake.",
+"Why do cows have hooves instead of feet? Because they lactose.",
+"Why did the computer go to therapy? Too many bytes from the past.",
+"Why was the math book sad? It had too many problems.",
+"Why did the golfer bring two pairs of pants? In case he got a hole in one."
+];
+
+let random = Math.floor(Math.random() * jokes.length);
+
+document.getElementById("joke").innerText = jokes[random];
+}
+</script>
+
+</body>
+</html>
